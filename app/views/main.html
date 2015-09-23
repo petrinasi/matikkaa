@@ -1,0 +1,31 @@
+<div class="container">
+    <div ng-controller="MainCtrl">
+        <form name="myForm">
+            <label for="taskSelect">Valitse tehtävä:</label>
+            <select name="taskSelect" id="taskSelect" ng-change="generateCalculations()"
+                    ng-options="option.name for option in data.availableOptions track by option.id"
+                    ng-model="data.selectedOption"></select>
+        </form>
+        <hr>
+
+        <!--Selected task is consructed here        -->
+        <table style="width:100%">
+            <tr>
+                <th class="firstcol">Laskutehtävä</th>
+                <th></th>
+                <th>Vastaus</th>
+            </tr>
+            <tr ng-repeat="task in data.generatedCalculations">
+                <td class="firstcol">
+                    {{task.question}}
+                </td>
+                <td class="centercol">=</td>
+                <td>
+                    <input type="text" name="answer" size="6" ng-model="task.userInput" ng-change="checkAnswer(task.userInput, $index)">
+                    <span class="glyphicon" ng-class="task.statusIcon" style="color:green"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
