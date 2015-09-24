@@ -1,15 +1,15 @@
 <div class="container">
     <div ng-controller="MainCtrl">
-        <form name="myForm">
-            <label for="taskSelect">Valitse tehtävä:</label>
-            <select name="taskSelect" id="taskSelect" ng-change="generateCalculations()"
-                    ng-options="option.name for option in data.availableOptions track by option.id"
-                    ng-model="data.selectedOption"></select>
-        </form>
+        <!--        <form name="myForm">-->
+        <label for="taskSelect">Valitse tehtävä:</label>
+        <select name="taskSelect" id="taskSelect" ng-change="generateCalculations()"
+                ng-options="option.name for option in data.availableOptions track by option.id"
+                ng-model="data.selectedOption"></select>
+        <!--        </form>-->
         <hr>
 
         <!--Selected task is consructed here        -->
-        <table style="width:100%">
+        <table style="width:40%">
             <tr>
                 <th class="firstcol">Laskutehtävä</th>
                 <th></th>
@@ -21,11 +21,15 @@
                 </td>
                 <td class="centercol">=</td>
                 <td>
-                    <input type="text" name="answer" size="6" ng-model="task.userInput" ng-change="checkAnswer(task.userInput, $index)">
-                    <span class="glyphicon" ng-class="task.statusIcon" style="color:green"></span>
+                    <input class="answer" type="text" name="answer" size="6" ng-model="task.userInput" ng-change="checkAnswer(task.userInput, $index)">
+                </td>
+                <td><span class="glyphicon glyphicon-answer" ng-class="task.statusIcon"></span>
                 </td>
             </tr>
         </table>
+        <hr>
+        <button id="newButton" ng-click="generateCalculations()">Uusi tehtävä!</button>
+
     </div>
 </div>
 

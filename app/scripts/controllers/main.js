@@ -14,13 +14,16 @@ angular.module('matikkaApp')
             availableOptions: [
                 {id: '1', name: 'Yhteenlaskua'},
                 {id: '2', name: 'Vähennylaskua'},
-                {id: 'r', name: 'Yhteen- ja vähennyslaskua'}
+                {id: '3', name: 'Yhteen- ja vähennyslaskua'},
+                {id: '4', name: 'Kertolaskua'},
+//                {id: '5', name: 'Jakolaskua'},
+                {id: 'r', name: 'Kaikki'}
             ],
             selectedOption: {id: '1', name: 'Yhteenlaskua'}, //This sets the default value of the select in the ui
             config: {
                 length: 10,
                 nmbrOfValues: 2,
-                maxValue: 20
+                maxValue: 10
             },
             generatedCalculations: []
         };
@@ -39,7 +42,8 @@ angular.module('matikkaApp')
                 }
 
                 question = questionList.toString().replace(/,/g," ");
-                $scope.data.generatedCalculations.push({question: question, answer: eval(question), userInput: ""});
+                $scope.data.generatedCalculations.push({question: question,
+                                                        answer: eval(question), userInput: ""});
             }
         };
 
@@ -47,6 +51,9 @@ angular.module('matikkaApp')
             var id, mark;
             if ($scope.data.selectedOption.id === 'r') {
                 id = Math.floor(Math.random() * $scope.data.availableOptions.length).toString();
+            }
+            else if ($scope.data.selectedOption.id === '3') {
+                id = Math.floor(Math.random() * 3).toString();
             }
             else {
                 id = $scope.data.selectedOption.id;
@@ -59,6 +66,12 @@ angular.module('matikkaApp')
                 case '2':
                     mark = '-';
                     break;
+                case '4':
+                    mark = '*';
+                    break;
+//                case '5':
+//                    mark = '/';
+//                    break;
                 default:
                     mark = '+';
             }
@@ -66,12 +79,14 @@ angular.module('matikkaApp')
         }
 
         $scope.checkAnswer = function (userInput, index) {
+            //setTimeout(function(){
             if (userInput === $scope.data.generatedCalculations[index].answer.toString()) {
                 $scope.data.generatedCalculations[index].statusIcon = 'glyphicon-ok';
             }
             else {
                 $scope.data.generatedCalculations[index].statusIcon = '';
             }
+            //}, 1000);
         };
 
         $scope.generateCalculations();
