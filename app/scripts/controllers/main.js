@@ -16,13 +16,14 @@ angular.module('matikkaApp')
                 {id: '2', name: 'Vähennylaskua'},
                 {id: '3', name: 'Yhteen- ja vähennyslaskua'},
                 {id: '4', name: 'Kertolaskua'},
-//                {id: '5', name: 'Jakolaskua'},
+                //                {id: '5', name: 'Jakolaskua'},
                 {id: 'r', name: 'Kaikki'}
             ],
             selectedOption: {id: '1', name: 'Yhteenlaskua'}, //This sets the default value of the select in the ui
             config: {
-                length: 10,
+                rows: 10,
                 nmbrOfValues: 2,
+                minValue: 1,
                 maxValue: 10
             },
             generatedCalculations: []
@@ -30,22 +31,39 @@ angular.module('matikkaApp')
 
         $scope.generateCalculations = function () {
             $scope.data.generatedCalculations = [];
+            var found = false;
 
-            for (var i = 0; i < $scope.data.config.length; i++) {
-                var questionList = [], question;
-                questionList.push(Math.floor((Math.random() *  ($scope.data.config.maxValue+1))).toString());
+            for (var i = 0; i < $scope.data.config.rows; found = false) {
+                var questionList = [], question, tmpVal, tmpQuestion;
+                tmpVal = getRndValue($scope.data.config.minValue, $scope.data.config.maxValue);
+                questionList.push(tmpVal.toString());
 
                 for (var x = 1; x < $scope.data.config.nmbrOfValues; x++) {
                     questionList.push(getMark());
-                    questionList.push(Math.floor((Math.random() *
-                                                  ($scope.data.config.maxValue+1))).toString());
+                    tmpVal = getRndValue($scope.data.config.minValue, $scope.data.config.maxValue);
+                    questionList.push(tmpVal.toString());
                 }
 
                 question = questionList.toString().replace(/,/g," ");
-                $scope.data.generatedCalculations.push({question: question,
-                                                        answer: eval(question), userInput: ""});
+                tmpQuestion = {question: question, answer: eval(question), userInput: ""};
+
+                for (var y = 0; y < i; y++) {
+                    if ($scope.data.generatedCalculations[y].question === tmpQuestion.question) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    i++;
+                    $scope.data.generatedCalculations.push(tmpQuestion);
+                }
             }
         };
+
+        function getRndValue(minVal, maxVal) {
+            return Math.floor((Math.random() * maxVal)+minVal);
+        }
 
         function getMark() {
             var id, mark;
@@ -69,9 +87,9 @@ angular.module('matikkaApp')
                 case '4':
                     mark = '*';
                     break;
-//                case '5':
-//                    mark = '/';
-//                    break;
+                    //                case '5':
+                    //                    mark = '/';
+                    //                    break;
                 default:
                     mark = '+';
             }
