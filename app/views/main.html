@@ -1,12 +1,12 @@
 <div class="container">
-    <div ng-controller="MainCtrl">
+    <div ng-controller="MainCtrl as main">
+        <p>{{main.test}}</p>
         <label for="taskSelect">Valitse tehtävä:</label>
-        <select name="taskSelect" id="taskSelect" ng-change="generateCalculations()"
-                ng-options="option.name for option in data.availableOptions track by option.id"
-                ng-model="data.selectedOption"></select>
+        <select name="taskSelect" id="taskSelect" ng-change="main.generateCalculations()"
+                ng-options="option.name for option in main.data.availableOptions track by option.id"
+                ng-model="main.data.selectedOption"></select>
         <hr>
-
-        <!--Selected task is consructed here        -->
+        <!--        Selected task is consructed here        -->
         <table width="40%">
             <thead>
                 <tr>
@@ -15,27 +15,27 @@
                     <th>Vastaus</th>
                 </tr>
             </thead>
-            <tr ng-repeat="task in data.generatedCalculations">
+            <tr ng-repeat="task in main.data.generatedCalculations">
                 <td class="firstcol">
                     {{task.question}}
                 </td>
                 <td class="centercol">=</td>
                 <td>
-                    <input class="answer" type="text" name="answer" maxlength="6" size="6" ng-model="task.userInput" ng-model-options="{ debounce: 1500 }" ng-change="checkAnswer(task.userInput, $index)">
+                    <input class="answer" type="text" name="answer" maxlength="6" size="6" ng-model="task.userInput" ng-model-options="{ debounce: 1500 }" ng-change="main.checkAnswer(task.userInput, $index)">
                 </td>
                 <td><span class="glyphicon glyphicon-answer" ng-class="task.statusIcon"></span>
                 </td>
             </tr>
         </table>
         <hr>
-        <button id="newButton" ng-click="generateCalculations()">Uusi tehtävä!</button>
+        <button id="newButton" ng-click="main.generateCalculations()">Uusi tehtävä!</button>
         <br>
         Näytä asetukset: <input type="checkbox" ng-model="showConfig" aria-label="Toggle ngHide" style="margin-bottom: 15px"><br/>
 
         <form name="myForm" ng-show="showConfig">
-            Suurin luku:<input type="number" name="maxRespValue" ng-model="data.config.maxValue" min="10"><br>
-            Rivien määrä:<input type="number" name="numberOfRows" ng-model="data.config.rows" min="5" max="30"><br>
-            Numeroiden määrä tehtävässä:<input type="number" name="numberOfValues" ng-model="data.config.nmbrOfValues" min="2" max="5"><hr>
+            Suurin luku:<input type="number" name="maxRespValue" ng-model="main.data.config.maxValue" min="10"><br>
+            Rivien määrä:<input type="number" name="numberOfRows" ng-model="main.data.config.rows" min="5" max="30"><br>
+            Numeroiden määrä tehtävässä:<input type="number" name="numberOfValues" ng-model="main.data.config.nmbrOfValues" min="2" max="5"><hr>
         </form>
     </div>
 </div>
