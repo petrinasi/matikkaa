@@ -1,0 +1,12 @@
+<div ng-controller="SettingsCtrl as settings">
+    <form>
+        Pienin luku:<br>
+        <input type="number" ng-model="settings.config.minValue"><br>
+        Suurin luku:<br>
+        <input type="number" name="maxValue" ng-model="settings.config.maxValue" min="10"><br>
+        Rivien määrä:<br>
+        <input type="number" name="numberOfRows" ng-model="settings.config.rows" min="5" max="30"><br>
+        Numeroiden määrä tehtävässä:<br>
+        <input type="number" name="numberOfValues" ng-model="settings.config.nmbrOfValues" min="2" max="5"><hr>
+    </form>
+</div>

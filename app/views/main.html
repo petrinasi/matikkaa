@@ -30,13 +30,6 @@
         <hr>
         <button id="newButton" ng-click="main.generateCalculations()">Uusi tehtävä!</button>
         <br>
-        Näytä asetukset: <input type="checkbox" ng-model="showConfig" aria-label="Toggle ngHide" style="margin-bottom: 15px"><br/>
-
-        <form name="myForm" ng-show="showConfig">
-            Suurin luku:<input type="number" name="maxRespValue" ng-model="main.data.config.maxValue" min="10"><br>
-            Rivien määrä:<input type="number" name="numberOfRows" ng-model="main.data.config.rows" min="5" max="30"><br>
-            Numeroiden määrä tehtävässä:<input type="number" name="numberOfValues" ng-model="main.data.config.nmbrOfValues" min="2" max="5"><hr>
-        </form>
     </div>
 </div>
 

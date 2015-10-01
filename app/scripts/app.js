@@ -9,22 +9,27 @@
  * Main module of the application.
  */
 angular
-  .module('matikkaApp', [
+    .module('matikkaApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
     'ngTouch'
-  ])
-  .config(function ($routeProvider) {
+])
+    .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
+        .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
-      })
-      .otherwise({
+    })
+        .when('/settings', {
+        templateUrl: 'views/settings.html',
+        controller: 'SettingsCtrl',
+        controllerAs: 'settings'
+    })
+        .otherwise({
         redirectTo: '/'
-      });
-  });
+    });
+});
