@@ -1,9 +1,13 @@
 <div ng-controller="SettingsCtrl as settings">
     <form>
+<!--
         Pienin luku:<br>
         <input type="number" ng-model="settings.config.minValue"><br>
         Suurin luku:<br>
         <input type="number" name="maxValue" ng-model="settings.config.maxValue" min="10"><br>
+-->
+        <!--        Min and Max values with slider-->
+        <input ng-model="settings.value" type="text" id="rangeSlider" slider options="settings.options" ng-change="settings.updateMinMax()"/><br>
         Rivien määrä:<br>
         <input type="number" name="numberOfRows" ng-model="settings.config.rows" min="5" max="30"><br>
         Numeroiden määrä tehtävässä:<br>

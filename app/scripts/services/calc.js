@@ -24,7 +24,7 @@ angular.module('matikkaApp')
         config: {
             rows: 10,
             nmbrOfValues: 2,
-            minValue: 1,
+            minValue: 0,
             maxValue: 10
         },
         generatedCalculations: []

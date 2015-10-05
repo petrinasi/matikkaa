@@ -1,6 +1,5 @@
 <div class="container">
     <div ng-controller="MainCtrl as main">
-        <p>{{main.test}}</p>
         <label for="taskSelect">Valitse tehtävä:</label>
         <select name="taskSelect" id="taskSelect" ng-change="main.generateCalculations()"
                 ng-options="option.name for option in main.data.availableOptions track by option.id"

@@ -15,7 +15,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'angularAwesomeSlider'
 ])
     .config(function ($routeProvider) {
     $routeProvider
